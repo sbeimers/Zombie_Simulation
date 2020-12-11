@@ -1,19 +1,26 @@
 package game;
 
+import javafx.scene.shape.Circle;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Zombie extends Person {
-    int decayTimer;
-    int decayMaxTimer;
-    int sleepTimer;
-    int sleepMaxTimer;
+    private int decayTimer;
+    private int decayMaxTimer;
+    private int sleepTimer;
+    private int sleepMaxTimer;
+
+    public Circle circle;
 
     static int defaultDecayTimer = 0;
     static int defaultDecayMaxTimer = 500;
     static int defaultSleepTimer = 0;
     static int defaultSleepMaxTimer = 5;
     static int infectionChance = 80;
+    static int defaultradius = 5;
+    static int defaultX = 100;
+    static int defaultY = 100;
 
 
     public String toString(){
@@ -31,7 +38,6 @@ public class Zombie extends Person {
         this.setMoveSpeed(moveSpeed);
         this.setWanderTime(wanderTime);
         this.setAlive(true);
-
     }
 
     public Zombie(int xPos, int yPos) {
@@ -71,7 +77,7 @@ public class Zombie extends Person {
         return closest;
     }
 
-    public void chase(Person closest_target){
+    public boolean chase(Person closest_target){
         int ms = this.getMoveSpeed();
         //System.out.println("NOT IN MS LOOP");
         //System.out.println("ms" + ms);
@@ -92,36 +98,30 @@ public class Zombie extends Person {
                 this.moveUp();
             }else {
                 System.out.println("hi");
-                killByZombie(closest_target);
+                if(killByZombie(closest_target)){
+                    return true;
+                }
                 break;
             }
         }
 
         this.decayTimer++;
 
-
-
-        /*
-        target = determineClosestCiv();
-
-        for(i=0;i<movespeed;i++){
-            direction = this.choosedirection(target)
-            if direction ==
-        }
-
-        */
+        return false;
 
     }
 
-    public void killByZombie(Person closest_target){
+    public boolean killByZombie(Person closest_target){
         closest_target.setAlive(false);
         Random rand = new Random();
         int x = rand.nextInt(100);
         System.out.println(x);
         if (x <= infectionChance){
+            return true;
             //zombies.add(zombie)
             //Zombie zombie = new Zombie(closest_target.getxPos(), closest_target.getyPos());
         }
+        return false;
 
 
     }

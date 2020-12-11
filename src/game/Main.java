@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -22,17 +23,12 @@ import javafx.scene.image.ImageView;
 
 import javax.swing.*;
 
-import java.util.ArrayList;
+import java.util.*;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.Timer;
 
 public class Main extends Application {
 
@@ -45,13 +41,56 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         // 25:22
-        /*Scene scene = new Scene(new Pane(), 1500, 900);
+
+        Scene scene = new Scene(new Pane(), 1500, 900);
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(scene);
         primaryStage.show();
-        */
-        Pane mainPane = new Pane();
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        ArrayList<Civilian> civs = new ArrayList<Civilian>();
+        ArrayList<Zombie> zeds = new ArrayList<Zombie>();
+
+        Civilian c1 = new Civilian(0,100);
+        Civilian c2 = new Civilian(80, 100);
+        Civilian c3 = new Civilian(130, 100);
+
+        civs.add(c1);
+        civs.add(c2);
+        civs.add(c3);
+
+
+        Zombie zed1 = new Zombie(20,100);
+        Zombie zed2 = new Zombie(200,200);
+        Zombie zed3 = new Zombie(32,30);
+
+        zeds.add(zed1);
+        zeds.add(zed2);
+        zeds.add(zed3);
+
+        System.out.println("civies: " + civs);
+        System.out.println("zombs: " + zeds);
+
+        /*for (int i = 0; i < 1; i++){
+            if (!tick(civs, zeds)){
+                break;
+            }
+        }*/
+
+        int count = 0;
+
+        //Timer timer = new Timer(true);
+
+        Timer timer = new Timer();
+        TimerTask Timertask = new MyTimerTask(civs, zeds, primaryStage);
+
+        timer.schedule(new MyTimerTask(civs, zeds, primaryStage), 0, 1000);
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /////Pane mainPane = new Pane();
+/*
         //Create a new button
         //Requires import javafx.scene.control.Button;
         Button b = new Button("Press Me");
@@ -70,7 +109,7 @@ public class Main extends Application {
         //Enable or disable the button
         b.setDisable(false);
         //b.setDisable(true);
-
+*//*
         //Create a button with and style it
         Button colorButton = new Button("Test");
         //Change the style of the image button
@@ -78,17 +117,18 @@ public class Main extends Application {
         colorButton.setStyle("-fx-font: 22 arial; -fx-base: rgb(170,0,0); -fx-text-fill: rgb(255,255,255);");
 
         //Set the location and size of both buttons
-        b.relocate(50,10);
+        //////////b.relocate(50,10);
         b.setPrefSize(200, 100);
         colorButton.relocate(50,150);
         colorButton.setPrefSize(200,100);
-
+        */
+/*
         Label title = new Label("TITLE");
         title.relocate(500,500);
         //Add the buttons to the main pane
-        mainPane.getChildren().add(b);
+        //mainPane.getChildren().add(b);
         mainPane.getChildren().add(title);
-        mainPane.getChildren().add(colorButton);
+        //mainPane.getChildren().add(colorButton);
 
         //Create a new scene using the mainPain as the root
         //Set the scene of the main window
@@ -96,6 +136,8 @@ public class Main extends Application {
         primaryStage.setTitle("Basic Button Demo");
         primaryStage.setScene(scene);
         primaryStage.show();
+        */
+
     }
 
 
@@ -103,7 +145,7 @@ public class Main extends Application {
 
 
 
-        //launch(args);
+        launch(args);
 
         /*
         Zombie zombie1 = new Zombie();
@@ -160,25 +202,29 @@ public class Main extends Application {
 
          */
 
+
+
+
+
         ArrayList<Civilian> civs = new ArrayList<Civilian>();
         ArrayList<Zombie> zeds = new ArrayList<Zombie>();
 
         Civilian c1 = new Civilian(0,100);
-        //Civilian c2 = new Civilian(80, 100);
-        //Civilian c3 = new Civilian(130, 100);
+        Civilian c2 = new Civilian(80, 100);
+        Civilian c3 = new Civilian(130, 100);
 
         civs.add(c1);
-        //civs.add(c2);
-        //civs.add(c3);
+        civs.add(c2);
+        civs.add(c3);
 
 
         Zombie zed1 = new Zombie(20,100);
-        //Zombie zed2 = new Zombie(200,200);
-        //Zombie zed3 = new Zombie(32,30);
+        Zombie zed2 = new Zombie(200,200);
+        Zombie zed3 = new Zombie(32,30);
 
         zeds.add(zed1);
-        //zeds.add(zed2);
-        //zeds.add(zed3);
+        zeds.add(zed2);
+        zeds.add(zed3);
 
         System.out.println("civies: " + civs);
         System.out.println("zombs: " + zeds);
@@ -188,15 +234,26 @@ public class Main extends Application {
                 break;
             }
         }*/
+
         int count = 0;
+
+        //Timer timer = new Timer(true);
+
+        //Timer timer = new Timer();
+        //TimerTask Timertask = new MyTimerTask(civs, zeds);
+
+        //timer.schedule(new MyTimerTask(civs, zeds), 0, 1000);
+
+        /*
         while(true){
             count++;
             if (!tick(civs, zeds)){
                 break;
             }
-        }
-        System.out.println(count);
-        System.out.println("done");
+        }*/
+
+        //System.out.println(count);
+        //System.out.println("done----------------------------------------------------------");
 
 
     }
@@ -241,7 +298,12 @@ public class Main extends Application {
 
         for (int i = 0; i < lenZombies; i++){
             Person target = zombs.get(i).findClosest(civilians);
-            zombs.get(i).chase(target);
+
+            if (zombs.get(i).chase(target)){
+                Zombie zed = new Zombie(target.getxPos(), target.getyPos());
+                zombs.add(zed);
+            }
+
             System.out.println("done chase");
             System.out.println("new stats:");
             System.out.println(zombs.get(i));
@@ -255,11 +317,13 @@ public class Main extends Application {
 
 
         for (int i = 0; i < lenCivilians; i++){
-            Person target = civilians.get(i).findClosest(zombies);
-            civies.get(i).run(target);
-            System.out.println("done run");
-            System.out.println("new stats:");
-            System.out.println(civies.get(i));
+            if (civilians.get(i).isAlive() == true){
+                Person target = civilians.get(i).findClosest(zombies);
+                civies.get(i).run(target);
+                System.out.println("done run");
+                System.out.println("new stats:");
+                System.out.println(civies.get(i));
+            }
         }
 
         return true;
