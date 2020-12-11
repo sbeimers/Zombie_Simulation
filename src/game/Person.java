@@ -74,6 +74,7 @@ public class Person {
         Person final_person = list.get(0);
 
         for (Person person: list){
+            //findDistance(person);
             int myX = this.getxPos();
             int myY = this.getyPos();
             int x = person.getxPos();
@@ -141,7 +142,7 @@ public class Person {
         if (xdiff == 0 && ydiff > 0 && this.getyPos() > Main.minY){
             return -2;
         }
-        if (xdiff == 0 && ydiff > 0 && this.getyPos() == Main.minY){
+        if (xdiff == 0 && ydiff > 0 && this.getyPos() >= Main.minY){
             int x = rand.nextInt(100);
             if (x % 2 == 0){
                 return 1;
@@ -153,7 +154,7 @@ public class Person {
         if (xdiff == 0 && ydiff < 0 && this.getyPos() < Main.maxY){
             return 2;
         }
-        if (xdiff == 0 && ydiff < 0 && this.getyPos() == Main.maxY){
+        if (xdiff == 0 && ydiff < 0 && this.getyPos() >= Main.maxY){
             int x = rand.nextInt(100);
             if (x % 2 == 0){
                 return 1;
@@ -165,7 +166,7 @@ public class Person {
         if (ydiff == 0 && xdiff > 0 && this.getxPos() > Main.minX){
             return -1;
         }
-        if (ydiff == 0 && xdiff > 0 && this.getxPos() == Main.minX){
+        if (ydiff == 0 && xdiff > 0 && this.getxPos() >= Main.minX){
             int x = rand.nextInt(100);
             if (x % 2 == 0){
                 return 2;
@@ -177,7 +178,7 @@ public class Person {
         if (ydiff == 0 && xdiff < 0 && this.getxPos() > Main.minX){
             return 1;
         }
-        if (ydiff == 0 && xdiff < 0 && this.getxPos() == Main.minX){
+        if (ydiff == 0 && xdiff < 0 && this.getxPos() >= Main.minX){
 
             int x = rand.nextInt(100);
             if (x % 2 == 0){

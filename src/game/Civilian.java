@@ -81,13 +81,15 @@ public class Civilian extends Person {
             else if (direction == 2 && this.getyPos() < game.Main.maxY){
                 this.moveDown();
             }
-            else if (direction == -2 && this.getxPos() > game.Main.minY){
+            else if (direction == -2 && this.getyPos() > game.Main.minY){
                 this.moveUp();
             }else {
 
                 System.out.println("hi");
                 System.out.println("GOING INTO SECOND DIRECTION");
+
                 int second_direction = this.chooseSecondDirectionRun(closest_target);
+
                 System.out.println("SECOND DIRECTION: " + second_direction);
 
                 if (second_direction == 1 && this.getxPos() < game.Main.maxX){
@@ -99,7 +101,7 @@ public class Civilian extends Person {
                 else if (second_direction == 2 && this.getyPos() < game.Main.maxY){
                     this.moveDown();
                 }
-                else if (second_direction == -2 && this.getxPos() > game.Main.minY) {
+                else if (second_direction == -2 && this.getyPos() > game.Main.minY) {
                     this.moveUp();
                 }
 
