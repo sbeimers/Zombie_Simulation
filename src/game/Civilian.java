@@ -6,12 +6,12 @@ public class Civilian extends Person {
         return String.format("Civilian at x:%d and y:%d.", getxPos(), getyPos());
     }
 
-    public Civilian(int x, int y, boolean defaultalive, int defaultmoveSpeed, int defaultwanderTime) {
+    public Civilian(int x, int y, boolean alive, int moveSpeed, int wanderTime) {
         setxPos(x);
         setyPos(y);
-        setAlive(defaultalive);
-        setMoveSpeed(defaultmoveSpeed);
-        setWanderTime(defaultwanderTime);
+        setAlive(alive);
+        setMoveSpeed(moveSpeed);
+        setWanderTime(wanderTime);
     }
 
     public Civilian(int x, int y) {
@@ -32,7 +32,7 @@ public class Civilian extends Person {
 */
 
     public Civilian() {
-        setxPos(defaultxPos );
+        setxPos(defaultxPos);
         setyPos(defaultyPos);
         setAlive(defaultalive);
         setMoveSpeed(defaultmoveSpeed);

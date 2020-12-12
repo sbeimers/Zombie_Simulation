@@ -45,11 +45,7 @@ public class Person {
         return moveSpeed;
     }
 
-    public int getWanderTime() {
-        return wanderTime;
-    }
-
-
+    public int getWanderTime() { return wanderTime; }
 
     public boolean isAlive() { return alive; }
 

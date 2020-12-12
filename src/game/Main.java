@@ -36,10 +36,10 @@ import java.util.ListIterator;
 
 public class Main extends Application {
 
-    public static int maxX = 1000;
-    public static int maxY = 800;
-    public static int minX = 0;
-    public static int minY = 0;
+    public static int maxX = 450 - 5;
+    public static int maxY = 450 - 5;
+    public static int minX = 0 + 5;
+    public static int minY = 0 + 5;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -162,6 +162,7 @@ public class Main extends Application {
 
         ArrayList<Civilian> civs = new ArrayList<Civilian>();
         ArrayList<Zombie> zeds = new ArrayList<Zombie>();
+        ArrayList<Person> dead = new ArrayList<Person>();
 
         Civilian c1 = new Civilian(0,100);
         //Civilian c2 = new Civilian(80, 100);
@@ -191,7 +192,7 @@ public class Main extends Application {
         int count = 0;
         while(true){
             count++;
-            if (!tick(civs, zeds)){
+            if (!tick(civs, zeds, dead)){
                 break;
             }
         }
@@ -201,7 +202,7 @@ public class Main extends Application {
 
     }
 
-    public static boolean tick(ArrayList<Civilian> civies, ArrayList<Zombie> zombs){
+    public static boolean tick(ArrayList<Civilian> civies, ArrayList<Zombie> zombs, ArrayList<Person> dead){
         System.out.println("civies: " + civies);
         System.out.println("zombs: " + zombs);
 
@@ -209,6 +210,7 @@ public class Main extends Application {
         while (iCivy.hasNext()){
             Civilian person = iCivy.next();
             if (person.isAlive() == false){
+                dead.add(person);
                 iCivy.remove();
             }
 
@@ -217,6 +219,7 @@ public class Main extends Application {
         while (iZombie.hasNext()){
             Zombie zombie = iZombie.next();
             if (zombie.getDecayTimer() >= zombie.getDecayMaxTimer()){
+                dead.add((Person)zombie);
                 iZombie.remove();
             }
 
@@ -241,7 +244,9 @@ public class Main extends Application {
 
         for (int i = 0; i < lenZombies; i++){
             Person target = zombs.get(i).findClosest(civilians);
-            zombs.get(i).chase(target);
+            if (zombs.get(i).chase(target)){
+                Zombie zed = new Zombie(zombs.get(i).getxPos(), zombs.get(i).getyPos());
+            }
             System.out.println("done chase");
             System.out.println("new stats:");
             System.out.println(zombs.get(i));
