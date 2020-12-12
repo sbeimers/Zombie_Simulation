@@ -30,6 +30,9 @@ public class Person {
         this.wanderTime = wanderTime;
     }
 
+    public void die(){
+        this.alive = false;
+    }
 
 
 

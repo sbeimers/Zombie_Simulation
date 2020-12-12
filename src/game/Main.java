@@ -244,8 +244,11 @@ public class Main extends Application {
 
         for (int i = 0; i < lenZombies; i++){
             Person target = zombs.get(i).findClosest(civilians);
+            zombs.get(i).decayByOne();
             if (zombs.get(i).chase(target)){
+                zombs.get(i).findClosest(civilians).die();
                 Zombie zed = new Zombie(zombs.get(i).getxPos(), zombs.get(i).getyPos());
+                zombs.add(zed);
             }
             System.out.println("done chase");
             System.out.println("new stats:");
@@ -266,6 +269,8 @@ public class Main extends Application {
             System.out.println("new stats:");
             System.out.println(civies.get(i));
         }
+
+
 
         return true;
 

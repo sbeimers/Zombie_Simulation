@@ -20,6 +20,39 @@ public class ClientGUI extends JFrame {
     private int pX, pY;
     private JPanel contentPane;
 
+
+    private static ArrayList<Civilian> civs;
+    private static ArrayList<Zombie> zeds;
+    private static ArrayList<Person> dead;
+
+    public static ArrayList<Civilian> getCivs() {
+        return civs;
+    }
+
+    public static ArrayList<Zombie> getZeds() {
+        return zeds;
+    }
+
+    public ArrayList<Person> getDead() {
+        return dead;
+    }
+
+    public static void setCivs(ArrayList<Civilian> inputcivs) {
+        civs = inputcivs;
+    }
+
+    public static void setZeds(ArrayList<Zombie> inputzeds) {
+        zeds = inputzeds;
+    }
+
+    public void setDead(ArrayList<Person> inputdead) {
+        dead = inputdead;
+    }
+
+    public void addZed(Zombie inputzed) {
+        zeds.add(inputzed);
+    }
+
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -68,9 +101,9 @@ public class ClientGUI extends JFrame {
 
         ////////////////////////////////////////////////////////////////////////////
 
-        ArrayList<Civilian> civs = new ArrayList<Civilian>();
-        ArrayList<Zombie> zeds = new ArrayList<Zombie>();
-        ArrayList<Person> dead = new ArrayList<Person>();
+        civs = new ArrayList<Civilian>();
+        zeds = new ArrayList<Zombie>();
+        dead = new ArrayList<Person>();
 /*
         Civilian c1 = new Civilian(5,100);
         Civilian c2 = new Civilian(80, 100);
@@ -104,10 +137,10 @@ public class ClientGUI extends JFrame {
         zeds.add(zed1);
         zeds.add(zed2);
         zeds.add(zed3);*/
-
-        simPanel.setCivilians(civs);
-        simPanel.setZombies(zeds);
-        simPanel.setDead(dead);
+        setSimPanel(simPanel, civs, zeds, dead);
+        //simPanel.setCivilians(civs);
+        //simPanel.setZombies(zeds);
+        //simPanel.setDead(dead);
 
         //int count = 0;
 
@@ -118,11 +151,22 @@ public class ClientGUI extends JFrame {
                 if (!Main.tick(civs, zeds, dead)){
                     //this.stop();
                 }
+                setSimPanel(simPanel, civs, zeds, dead);
+                //simPanel.setCivilians(civs);
+                //simPanel.setZombies(zeds);
+                //simPanel.setDead(dead);
                 simPanel.repaint();
             }
         });
 
         t.start();
 
+    }
+
+
+    public void setSimPanel(SimulationPanel simPanel, ArrayList<Civilian> civs, ArrayList<Zombie> zeds, ArrayList<Person> dead){
+        simPanel.setCivilians(civs);
+        simPanel.setZombies(zeds);
+        simPanel.setDead(dead);
     }
 }

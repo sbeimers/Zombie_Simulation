@@ -32,18 +32,26 @@ public class SimulationPanel extends JPanel {
         //g.setColor(Color.red);
         //g.drawRect(100,100,10,10);
 
+        for(Person d: dead ){
+            g.setColor(Color.orange);
+            g.drawRect((d.getxPos()-5)*2,(d.getyPos()-5)*2,10,10);
+        }
+
         for(Zombie zombie: Zombies){
-            g.setColor(Color.red);
-            g.drawRect(zombie.getxPos()-5,zombie.getyPos()-5,10,10);
+            if (zombie.sleepTimer < zombie.sleepMaxTimer){
+                g.setColor(Color.black);
+                g.drawRect((zombie.getxPos()-5)*2,(zombie.getyPos()-5)*2,10,10);
+            }else{
+                g.setColor(Color.red);
+                g.drawRect((zombie.getxPos()-5)*2,(zombie.getyPos()-5)*2,10,10);
+            }
+
         }
         for(Civilian civ: Civilians){
             g.setColor(Color.green);
-            g.drawRect(civ.getxPos()-5,civ.getyPos()-5,10,10);
+            g.drawRect((civ.getxPos()-5)*2,(civ.getyPos()-5)*2,10,10);
         }
-        for(Person d: dead ){
-            g.setColor(Color.orange);
-            g.drawRect(d.getxPos()-5,d.getyPos()-5,10,10);
-        }
+
 
 
     }

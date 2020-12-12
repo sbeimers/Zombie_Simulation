@@ -10,9 +10,9 @@ public class Zombie extends Person {
     int sleepMaxTimer;
 
     static int defaultDecayTimer = 0;
-    static int defaultDecayMaxTimer = 300;
+    static int defaultDecayMaxTimer = 200;
     static int defaultSleepTimer = 0;
-    static int defaultSleepMaxTimer = 5;
+    static int defaultSleepMaxTimer = 20;
     static int infectionChance = 101;
     static int defaultMoveSpeed = 3;
     static int defaultWanderTime = 5;
@@ -56,6 +56,14 @@ public class Zombie extends Person {
         return decayTimer;
     }
 
+    public void decayByOne() {
+        this.decayTimer++;
+    }
+
+    public void sleepTimerAddOne() {
+        this.sleepTimer ++;
+    }
+
     public int getDecayMaxTimer() {
         return decayMaxTimer;
     }
@@ -74,9 +82,14 @@ public class Zombie extends Person {
     }
 
     public boolean chase(Person closest_target){
+        if (this.getSleepTimer() < this.getSleepMaxTimer()){
+            this.sleepTimerAddOne();
+            return false;
+        }
         int ms = this.getMoveSpeed();
         //System.out.println("NOT IN MS LOOP");
         //System.out.println("ms" + ms);
+        //this.decayTimer++;
         for (int i = 0; i < ms; i++){
             //System.out.println("IN MS LOOP");
             int direction = this.chooseDirection(closest_target);
@@ -99,7 +112,7 @@ public class Zombie extends Person {
             }
         }
 
-        this.decayTimer++;
+        //this.decayTimer++;
 
         return false;
 
@@ -116,6 +129,9 @@ public class Zombie extends Person {
     }
 
     public boolean killByZombie(Person closest_target){
+        if (closest_target.isAlive() == false){
+            return false;
+        }
         closest_target.setAlive(false);
         Random rand = new Random();
         int x = rand.nextInt(100);
