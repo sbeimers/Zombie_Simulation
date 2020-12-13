@@ -81,6 +81,7 @@ public class ClientGUI extends JFrame {
 
         contentPane = new JPanel(new BorderLayout());
         contentPane.setBorder(null);
+        setTitle("Zombie Simulator 2020");
         contentPane.setBackground(Grey5);
         setContentPane(contentPane);
         setResizable(true);

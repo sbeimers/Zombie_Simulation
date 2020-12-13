@@ -15,8 +15,13 @@ public class ControlPanel extends JPanel {
     public ControlPanel() {
         super();
 
+
         JButton QAZbutton = new JButton(); // Quick Add Zombie
         QAZbutton.setText("Add Zombie");
+        QAZbutton.setBackground(Color.red);
+
+
+        QAZbutton.setSize(100,100);
         QAZbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -29,12 +34,11 @@ public class ControlPanel extends JPanel {
         });
         add(QAZbutton);
 
-
         ///////////
-
 
         JButton QACbutton = new JButton(); // Quick Add Zombie
         QACbutton.setText("Add Civilian");
+        QACbutton.setBackground(Color.green);
         QACbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

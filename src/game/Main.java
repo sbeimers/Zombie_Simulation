@@ -36,8 +36,8 @@ import java.util.ListIterator;
 
 public class Main extends Application {
 
-    public static int maxX = 450 - 5;
-    public static int maxY = 450 - 5;
+    public static int maxX = 450;
+    public static int maxY = 450;
     public static int minX = 0 + 5;
     public static int minY = 0 + 5;
 

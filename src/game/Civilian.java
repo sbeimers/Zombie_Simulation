@@ -111,7 +111,60 @@ public class Civilian extends Person {
 
     }
 
-    
+
+    /*
+
+    public void wander(){
+        int ms = this.getMoveSpeed();
+
+        for (int i = 0; i < ms; i++){
+
+            int direction = -1 * (this.chooseDirection(closest_target));
+            if (direction == -3){
+                break;
+            }
+
+            System.out.println("direction: " + direction);
+            if (direction == 1 && this.getxPos() < game.Main.maxX){
+                this.moveRight();
+            }
+            else if (direction == -1 && this.getxPos() > game.Main.minX){
+                this.moveLeft();
+            }
+            else if (direction == 2 && this.getyPos() < game.Main.maxY){
+                this.moveDown();
+            }
+            else if (direction == -2 && this.getyPos() > game.Main.minY){
+                this.moveUp();
+            }else {
+
+                System.out.println("hi");
+                System.out.println("GOING INTO SECOND DIRECTION");
+
+                int second_direction = this.chooseSecondDirectionRun(closest_target);
+
+                System.out.println("SECOND DIRECTION: " + second_direction);
+
+                if (second_direction == 1 && this.getxPos() < game.Main.maxX){
+                    this.moveRight();
+                }
+                else if (second_direction == -1 && this.getxPos() > game.Main.minX){
+                    this.moveLeft();
+                }
+                else if (second_direction == 2 && this.getyPos() < game.Main.maxY){
+                    this.moveDown();
+                }
+                else if (second_direction == -2 && this.getyPos() > game.Main.minY) {
+                    this.moveUp();
+                }
+
+            }
+        }
+    }
+
+     */
+
+
 
 
 
