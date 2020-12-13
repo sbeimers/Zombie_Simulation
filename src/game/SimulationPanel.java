@@ -37,7 +37,7 @@ public class SimulationPanel extends JPanel {
             g.setColor(Color.orange);
             // ((d.getxPos()-5)*2)*getBounds().width*((d.getxPos()-5)*2),((d.getyPos()-5)*2)*getBounds().width*(d.getyPos()-5)*2,
             // g.drawRect((d.getxPos()-5)*2,(d.getyPos()-5)*2,10,10);
-            g.drawRect(((d.getxPos()-5)*((getBounds().width)/450)),(d.getyPos()-5)*(((getBounds().height)/450)),10,10);
+            g.drawRect(((Math.round(d.getxPos()-5)*((getBounds().width)/450))),Math.round((d.getyPos()-5)*(((getBounds().height)/450))),10,10);
             // ((d.getxPos()-5)*2)*getBounds().width*((d.getxPos()-5)*2),((d.getyPos()-5)*2)*getBounds().width*(d.getyPos()-5)*2,
         }
 
@@ -47,11 +47,10 @@ public class SimulationPanel extends JPanel {
 
                 //g.drawRect((((zombie.getxPos()-5))*(getBounds().width*((zombie.getxPos()-5)*2))),((zombie.getyPos()-5))*getBounds().height*(zombie.getyPos()-5),10,10);
                 //g.drawRect((((zombie.getxPos()-5))*(450/(getBounds(SimulationPanel).width))),((zombie.getyPos()-5))*(450/(getBounds().height)),10,10);
-                g.drawRect((((zombie.getxPos()-5))*((getBounds().width)/450)),((zombie.getyPos()-5))*(((getBounds().height)/450)),10,10);
             }else{
                 g.setColor(Color.red);
-                g.drawRect((((zombie.getxPos()-5))*((getBounds().width)/450)),((zombie.getyPos()-5))*(((getBounds().height)/450)),10,10);
             }
+            g.drawRect((((zombie.getxPos()-5))*((getBounds().width)/450)),((zombie.getyPos()-5))*(((getBounds().height)/450)),10,10);
 
         }
         for(Civilian civ: Civilians){

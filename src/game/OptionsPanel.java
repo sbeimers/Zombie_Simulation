@@ -10,10 +10,12 @@ public class OptionsPanel extends JPanel {
     public OptionsPanel() {
         super();
 
+        JTextPane test = new JTextPane();
         JButton QAZbutton = new JButton(); // Quick Add Zombie
         QAZbutton.setText("Add Zombie");
         QAZbutton.setBackground(Color.red);
-        QAZbutton.setSize(100,100);
+        QAZbutton.setPreferredSize(new Dimension(130,60));
+        QAZbutton.setBounds(10,300,130,60);
         QAZbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -30,7 +32,7 @@ public class OptionsPanel extends JPanel {
         QACbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
             }
         });
         add(QACbutton);

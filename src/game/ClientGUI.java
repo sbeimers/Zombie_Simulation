@@ -1,10 +1,6 @@
 package game;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -99,6 +95,9 @@ public class ClientGUI extends JFrame {
         ControlPanel controlPanel = new ControlPanel();
         controlPanel.setBackground(Grey3);
         contentPane.add(controlPanel, BorderLayout.LINE_END);
+
+        simPanel.setMinimumSize(new Dimension(500,500));
+
 
         ////////////////////////////////////////////////////////////////////////////
 
