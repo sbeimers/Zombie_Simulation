@@ -3,15 +3,13 @@ package game;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Person {
+public abstract class Person {
 
     private int xPos;
     private int yPos;
     private int moveSpeed;
     private int wanderTime;
     private boolean alive;
-
-
 
 
     public void setxPos(int xPos) {
@@ -34,8 +32,6 @@ public class Person {
         this.alive = false;
     }
 
-
-
     public int getxPos() {
         return xPos;
     }
@@ -54,6 +50,11 @@ public class Person {
 
     public void setAlive(boolean alive) { this.alive = alive; }
 
+    /**
+     * Finds the distance between two Person objects
+     * @param person the person being compared to
+     * @return the difference in distance between the two objects.
+     */
     public int findDistance(Person person){
         int myX = this.getxPos();
         int myY = this.getyPos();
@@ -66,38 +67,28 @@ public class Person {
         return xdiff + ydiff;
     }
 
-
+    /**
+     * Finds the closest Person from an list of People
+     * @param list the list to compare
+     * @return
+     */
     public Person findClosest(ArrayList<Person> list){
         int shortest = this.findDistance(list.get(0));
 
         Person final_person = list.get(0);
 
         for (Person person: list){
-            //findDistance(person);
-            int myX = this.getxPos();
-            int myY = this.getyPos();
-            int x = person.getxPos();
-            int y = person.getyPos();
 
-            int xdiff = Math.abs(myX - x);
-            int ydiff = Math.abs(myY - y);
-
-            int dist = xdiff + ydiff;
+            int dist = this.findDistance(person);
 
             if (dist < shortest){
                 shortest = dist;
                 final_person = person;
             }
 
-            //System.out.println("list: " + list);
-            //System.out.println("person: " + person);
-            //final_person = person;
-
 
         }
-        System.out.println("closests Target for " + this + " is " + final_person);
         return final_person;
-
 
     }
 
@@ -115,24 +106,24 @@ public class Person {
         this.xPos += 1;
     }
 
+    /**
+     * Finds the direction for the person to go assuming the person is going towards the closest target arguement
+     * @param closest_target is the closest person to the person calling the funciton
+     * @return the direction the person should go to get closer to closest_target in the form of an int.
+     */
     public int chooseDirection(Person closest_target){
 
         boolean directions[] = {true, true, true, true};
 
         Random rand = new Random();
 
-        boolean up = true;    //0 1  -2
-        boolean right = true; //1 2   1
-        boolean down = true;  //2 3   2
-        boolean left = true;  //3 4  -1
+        boolean up = true;    //0 1  return value: -2
+        boolean right = true; //1 2  return value:  1
+        boolean down = true;  //2 3  return value:  2
+        boolean left = true;  //3 4  return value: -1
 
-        //int xdiff = zombie.getxPos() - closest_target.getxPos();
-        //int ydiff = zombie.getyPos() - closest_target.getyPos();
         int xdiff = this.getxPos() - closest_target.getxPos();
         int ydiff = this.getyPos() - closest_target.getyPos();
-
-        System.out.println("xdiff = " + xdiff);
-        System.out.println("ydiff = " + ydiff);
 
         if (xdiff == 0 && ydiff == 0){
             return 3;
@@ -187,7 +178,6 @@ public class Person {
             }
         }
 
-
         if (xdiff > 0){
             //right = false;
             directions[1] = false;
@@ -215,10 +205,6 @@ public class Person {
             directions[3] = false;
         }
 
-        //System.out.println(right);
-        //System.out.println(left);
-        //System.out.println(up);
-        //System.out.println(down);
         if (directions[0]){
             return -2;
         }
@@ -232,22 +218,14 @@ public class Person {
             return -1;
         }
 
-        /*for (int i = 0; i < 4; i++){
-            //System.out.println(i);
-            System.out.println(directions[i]);
-            if (directions[i]){
-                System.out.println(i);
-                return i;
-            }*/
-
         return 3;
 
     }
 
     /***
-     * Chooses second direction (only used by civilians pinned against walls)
-     * @param closest_target is closest target
-     * @return direction in the form of an int.
+     * Chooses second direction (only used by civilians pinned against walls). Assumes civilian is next to wall, which causes this function to run.
+     * @param closest_target is closest target to person calling function
+     * @return direction of closest target in the form of an int.
      */
     public int chooseSecondDirectionRun(Person closest_target){
 

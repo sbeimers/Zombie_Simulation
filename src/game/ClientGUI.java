@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -41,13 +40,14 @@ public class ClientGUI extends JFrame {
         zeds = inputzeds;
     }
 
-    public void setDead(ArrayList<Person> inputdead) {
+    public static void setDead(ArrayList<Person> inputdead) {
         dead = inputdead;
     }
 
     public void addZed(Zombie inputzed) {
         zeds.add(inputzed);
     }
+
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -66,19 +66,18 @@ public class ClientGUI extends JFrame {
         Color Grey1 = new Color (50, 50, 50);
         Color Grey2 = new Color (65, 65, 65);
         Color Grey3 = new Color (80, 80, 80);
-        Color Grey4 = new Color (95, 95, 95);
-        Color Grey5 = new Color (105, 105, 105);
+        Color Grey4 = new Color (105, 105, 105);
 
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         int sc_width = gd.getDisplayMode().getWidth();
         int sc_height = gd.getDisplayMode().getHeight();
-        int window_width = 1080;
-        int window_height = 640;
+        int window_width = 1550;
+        int window_height = 940;
 
         contentPane = new JPanel(new BorderLayout());
         contentPane.setBorder(null);
         setTitle("Zombie Simulator 2020");
-        contentPane.setBackground(Grey5);
+        contentPane.setBackground(Grey4);
         setContentPane(contentPane);
         setResizable(true);
         setBounds((sc_width / 2) - (window_width / 2), (sc_height / 2) - (window_height / 2), window_width, window_height);
@@ -94,9 +93,7 @@ public class ClientGUI extends JFrame {
 
         ControlPanel controlPanel = new ControlPanel();
         controlPanel.setBackground(Grey3);
-        contentPane.add(controlPanel, BorderLayout.LINE_END);
-
-        simPanel.setMinimumSize(new Dimension(500,500));
+        contentPane.add(controlPanel, BorderLayout.SOUTH);
 
 
         ////////////////////////////////////////////////////////////////////////////
@@ -104,16 +101,7 @@ public class ClientGUI extends JFrame {
         civs = new ArrayList<Civilian>();
         zeds = new ArrayList<Zombie>();
         dead = new ArrayList<Person>();
-/*
-        Civilian c1 = new Civilian(5,100);
-        Civilian c2 = new Civilian(80, 100);
-        Civilian c3 = new Civilian(130, 100);
 
-        civs.add(c1);
-        civs.add(c2);
-        civs.add(c3);
-
-*/
         Random rand = new Random();
 
         for (int i = 0; i < 20; i++){
@@ -129,40 +117,23 @@ public class ClientGUI extends JFrame {
             zeds.add(zz);
         }
 
-/*
-        Zombie zed1 = new Zombie(20,100);
-        Zombie zed2 = new Zombie(200,200);
-        Zombie zed3 = new Zombie(32,30);
 
-        zeds.add(zed1);
-        zeds.add(zed2);
-        zeds.add(zed3);*/
         setSimPanel(simPanel, civs, zeds, dead);
-        //simPanel.setCivilians(civs);
-        //simPanel.setZombies(zeds);
-        //simPanel.setDead(dead);
 
-        //int count = 0;
 
         javax.swing.Timer t = new javax.swing.Timer(30, new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                //count++;
                 if (!Main.tick(civs, zeds, dead)){
-                    //this.stop();
                 }
                 setSimPanel(simPanel, civs, zeds, dead);
-                //simPanel.setCivilians(civs);
-                //simPanel.setZombies(zeds);
-                //simPanel.setDead(dead);
+
                 simPanel.repaint();
             }
         });
-
         t.start();
 
     }
-
 
     public void setSimPanel(SimulationPanel simPanel, ArrayList<Civilian> civs, ArrayList<Zombie> zeds, ArrayList<Person> dead){
         simPanel.setCivilians(civs);
